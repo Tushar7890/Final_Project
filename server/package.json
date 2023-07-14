@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
-    "build": "react-scripts build"
+    "build": "npm i"
   },
   "engines": {
     "node": "16.13.0",
