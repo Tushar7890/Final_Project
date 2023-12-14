@@ -67,8 +67,6 @@ export const addTransactionController = async (req, res) => {
 
 export const getAllTransactionController = async (req, res) => {
   try {
-
-
     const { frequency, userId, startDate, endDate, type } = req.body;
 
     // console.log( frequency, userId, startDate, endDate, type );
@@ -83,21 +81,21 @@ export const getAllTransactionController = async (req, res) => {
     }
 
     const transactions = await Transaction.find({
-
-        ...(frequency !== 'custom' ? {
+      ...(frequency !== "custom"
+        ? {
             date: {
-                $gt: moment().subtract(Number(frequency), "days").toDate(),
+              $gt: moment().subtract(Number(frequency), "days").toDate(),
             },
-
-        } : {
+          }
+        : {
             date: {
-                $gte: startDate,
-                $lte: endDate,
+              $gte: startDate,
+              $lte: endDate,
             },
-        }),
-      
+          }),
+
       user: userId,
-      ...(type !== 'all' ) && {transactionType: type}
+      ...(type !== "all" && { transactionType: type }),
     });
 
     // console.log(transactions);
