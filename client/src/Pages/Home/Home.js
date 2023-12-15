@@ -57,12 +57,13 @@ const Home = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         // console.log(user);
 
-        if (user.isAvatarImageSet === false || user.avatarImage === "") {
-          navigate("/setAvatar");
-        }
+        // if (user.isAvatarImageSet === false || user.avatarImage === "") {
+        //   navigate("/setAvatar");
+        // }
         setcUser(user);
         setRefresh(true);
-      } else {
+      }
+       else {
         navigate("/register");
       }
     };
@@ -127,27 +128,29 @@ const Home = () => {
     //   toast.error(data.message, toastOptions);
     // }
 
-    await axios.post(addTransaction, {
-      title: title,
-      amount: amount,
-      description: description,
-      category: category,
-      date: date,
-      transactionType: transactionType,
-      userId: cUser._id,
-    }).then((res)=>{
-      if (res.data.success === true) {
-        toast.success(res.data.message, toastOptions);
-        handleClose();
-        setRefresh(!refresh);
-      } else {
-        toast.error(res.data.message, toastOptions);
-      }
-    })
-    .catch((err)=>{
-      // alert("All fields are required")
-      toast.error("All fileds are required", toastOptions);
-    })
+    await axios
+      .post(addTransaction, {
+        title: title,
+        amount: amount,
+        description: description,
+        category: category,
+        date: date,
+        transactionType: transactionType,
+        userId: cUser._id,
+      })
+      .then((res) => {
+        if (res.data.success === true) {
+          toast.success(res.data.message, toastOptions);
+          handleClose();
+          setRefresh(!refresh);
+        } else {
+          toast.error(res.data.message, toastOptions);
+        }
+      })
+      .catch((err) => {
+        // alert("All fields are required")
+        toast.error("All fileds are required", toastOptions);
+      });
 
     setLoading(false);
   };
@@ -207,7 +210,7 @@ const Home = () => {
       ) : (
         <>
           <Container
-            style={{ position: "relative", zIndex: "2 !important"}}
+            style={{ position: "relative", zIndex: "2 !important" }}
             className="mt-3"
           >
             <div className="filterRow">
